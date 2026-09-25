@@ -1653,6 +1653,7 @@ name = "vault"
 version = "0.1.0"
 dependencies = [
  "color-eyre",
+ "crossterm",
  "ratatui",
  "thiserror 2.0.20",
 ]
