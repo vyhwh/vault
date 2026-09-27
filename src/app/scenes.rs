@@ -20,7 +20,7 @@ impl Scene {
 impl Widget for Scene {
     fn render(self, area: ratatui::prelude::Rect, buf: &mut ratatui::prelude::Buffer)
     where
-        Self: Sized
+        Self: Sized,
     {
         match self {
             Scene::Home(home) => home.render(area, buf),
