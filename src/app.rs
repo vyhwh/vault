@@ -59,9 +59,7 @@ impl Widget for &App {
     where
         Self: Sized,
     {
-        match self.scene {
-            Scene::Home(home) => home.render(area, buf),
-        }
+        self.scene.render(area, buf)
     }
 }
 
