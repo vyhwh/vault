@@ -1,10 +1,10 @@
-use ratatui::{Frame, crossterm::event::KeyEvent};
+use ratatui::{Frame, crossterm::event::KeyEvent, layout::Rect};
 
 #[derive(Default)]
 pub struct HomeScene;
 
 impl HomeScene {
-    pub fn render(&self, frame: &mut Frame) {
+    pub fn render(&self, frame: &mut Frame, viewport: Rect) {
         // Renderizar o conteúdo da cena home
     }
 

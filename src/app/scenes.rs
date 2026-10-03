@@ -2,7 +2,7 @@ mod home;
 
 pub use home::HomeScene;
 
-use ratatui::{Frame, crossterm::event::KeyEvent};
+use ratatui::{Frame, crossterm::event::KeyEvent, layout::Rect};
 
 pub enum Scene {
     Home(HomeScene),
@@ -15,9 +15,9 @@ impl Scene {
         }
     }
 
-    pub fn render(&self, frame: &mut Frame) {
+    pub fn render(&self, frame: &mut Frame, viewport: Rect) {
         match self {
-            Self::Home(home) => home.render(frame),
+            Self::Home(home) => home.render(frame, viewport),
         }
     }
 }
