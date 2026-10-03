@@ -4,12 +4,9 @@ use scenes::HomeScene;
 use scenes::Scene;
 
 use color_eyre::eyre::Result;
-use ratatui::buffer::Buffer;
-use ratatui::layout::Rect;
 use ratatui::{
     DefaultTerminal, Frame,
     crossterm::event::{self, Event, KeyCode, KeyEvent, KeyEventKind},
-    widgets::Widget,
 };
 
 pub struct App {
@@ -28,7 +25,7 @@ impl App {
     }
 
     fn draw(&self, frame: &mut Frame) {
-        frame.render_widget(self, frame.area());
+        self.scene.render(frame);
     }
 
     fn handle_events(&mut self) -> Result<()> {
@@ -51,15 +48,6 @@ impl App {
 
     fn exit(&mut self) {
         self.exit = true;
-    }
-}
-
-impl Widget for &App {
-    fn render(self, area: Rect, buf: &mut Buffer)
-    where
-        Self: Sized,
-    {
-        self.scene.render(area, buf)
     }
 }
 

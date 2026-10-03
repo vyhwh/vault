@@ -2,9 +2,8 @@ mod home;
 
 pub use home::HomeScene;
 
-use ratatui::{crossterm::event::KeyEvent, widgets::Widget};
+use ratatui::{Frame, crossterm::event::KeyEvent};
 
-#[derive(Clone, Copy)]
 pub enum Scene {
     Home(HomeScene),
 }
@@ -15,15 +14,10 @@ impl Scene {
             Scene::Home(home) => home.handle_key_event(key_event),
         }
     }
-}
 
-impl Widget for Scene {
-    fn render(self, area: ratatui::prelude::Rect, buf: &mut ratatui::prelude::Buffer)
-    where
-        Self: Sized,
-    {
+    pub fn render(&self, frame: &mut Frame) {
         match self {
-            Scene::Home(home) => home.render(area, buf),
+            Self::Home(home) => home.render(frame),
         }
     }
 }
