@@ -10,7 +10,7 @@ use ratatui::widgets::Block;
 use ratatui::widgets::Borders;
 use ratatui::widgets::Padding;
 use ratatui::widgets::Widget;
-use scenes::HomeScene;
+use scenes::Passwords;
 use scenes::Scene;
 
 use color_eyre::eyre::Result;
@@ -73,7 +73,8 @@ impl App {
                 bottom: 1,
             });
 
-        block.clone().render(horizontal[1], frame.buffer_mut());
+        let viewport = block.inner(horizontal[1]);
+        block.render(horizontal[1], frame.buffer_mut());
 
         // Mensagem de ajuda
         let bottom_help = "↑/↓ for navigation";
@@ -83,7 +84,7 @@ impl App {
             .render(vertical[3], frame.buffer_mut());
 
         // Retorna o lugar/viewport onde a cena atual deve ser renderizada
-        return block.inner(horizontal[1]);
+        viewport
     }
 
     fn handle_events(&mut self) -> Result<()> {
@@ -112,7 +113,7 @@ impl App {
 impl Default for App {
     fn default() -> Self {
         App {
-            scene: Scene::Home(HomeScene::default()),
+            scene: Scene::Passwords(Passwords::default()),
             exit: false,
         }
     }
