@@ -1,23 +1,23 @@
-mod home;
+mod passwords;
 
-pub use home::HomeScene;
+pub use passwords::Passwords;
 
 use ratatui::{Frame, crossterm::event::KeyEvent, layout::Rect};
 
 pub enum Scene {
-    Home(HomeScene),
+    Passwords(Passwords),
 }
 
 impl Scene {
     pub fn handle_key_event(&mut self, key_event: KeyEvent) {
         match self {
-            Scene::Home(home) => home.handle_key_event(key_event),
+            Scene::Passwords(passwords) => passwords.handle_key_event(key_event),
         }
     }
 
     pub fn render(&self, frame: &mut Frame, viewport: Rect) {
         match self {
-            Self::Home(home) => home.render(frame, viewport),
+            Self::Passwords(passwords) => passwords.render(frame, viewport),
         }
     }
 }
