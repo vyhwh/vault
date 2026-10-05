@@ -3,8 +3,10 @@ mod scenes;
 use ratatui::layout::Constraint;
 use ratatui::layout::Layout;
 use ratatui::layout::Rect;
+use ratatui::style::Color;
 use ratatui::style::Style;
-use ratatui::style::Stylize;
+use ratatui::text::Line;
+use ratatui::text::Span;
 use ratatui::text::Text;
 use ratatui::widgets::Block;
 use ratatui::widgets::Borders;
@@ -77,10 +79,17 @@ impl App {
         block.render(horizontal[1], frame.buffer_mut());
 
         // Mensagem de ajuda
-        let bottom_help = "↑/↓ for navigation";
+        let bottom_help = Line::from(vec![
+            Span::styled("↑/↓", Style::default().bold().fg(Color::White)),
+            Span::styled(" navigate", Style::default().fg(Color::DarkGray)),
+            Span::styled("   enter", Style::default().bold().fg(Color::White)),
+            Span::styled(" select", Style::default().fg(Color::DarkGray)),
+            Span::styled("   q", Style::default().bold().fg(Color::White)),
+            Span::styled(" quit", Style::default().fg(Color::DarkGray)),
+        ]);
+
         Text::from(bottom_help)
             .centered()
-            .gray()
             .render(vertical[3], frame.buffer_mut());
 
         // Retorna o lugar/viewport onde a cena atual deve ser renderizada
