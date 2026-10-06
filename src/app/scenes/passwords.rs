@@ -14,17 +14,17 @@ pub struct Password {
 
 pub struct Passwords {
     pub cursor: usize,
-    pub items: Vec<Password>,
+    pub entries: Vec<Password>,
 }
 
 impl Passwords {
     pub fn render(&self, frame: &mut Frame, viewport: Rect) {
-        if self.items.len() == 0 {
+        if self.entries.len() == 0 {
             Text::from("No passwords saved yet").render(viewport, frame.buffer_mut());
             return;
         }
 
-        for (i, item) in self.items.iter().enumerate() {
+        for (i, item) in self.entries.iter().enumerate() {
             if i >= viewport.height as usize {
                 break;
             }
@@ -66,11 +66,11 @@ impl Passwords {
                 if self.cursor != 0 {
                     self.cursor -= 1;
                 } else {
-                    self.cursor = self.items.len() - 1;
+                    self.cursor = self.entries.len() - 1;
                 }
             }
             KeyCode::Down => {
-                if self.cursor < (self.items.len() - 1) {
+                if self.cursor < (self.entries.len() - 1) {
                     self.cursor += 1;
                 } else {
                     self.cursor = 0;
@@ -85,7 +85,7 @@ impl Default for Passwords {
     fn default() -> Self {
         Passwords {
             cursor: 0,
-            items: vec![],
+            entries: vec![],
         }
     }
 }
